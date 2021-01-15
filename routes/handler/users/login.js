@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
 		if (!user) {
 			return res
 				.status(404)
-				.json({ status: "error", message: "user not found!" });
+				.json({ status: "error", message: "user not found" });
 		}
 
 		const password = await bcrypt.compare(req.body.password, user.password);
