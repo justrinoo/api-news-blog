@@ -2,7 +2,7 @@ const { Articles, Users } = require("../../../models");
 module.exports = async (req, res) => {
 	try {
 		const article_id = req.params.id;
-		const { user_id, slug, title, description } = req.body;
+		const { user_id, slug, title, description, category } = req.body;
 		const articles = await Articles.findByPk(article_id, {
 			attributes: [
 				"id",
@@ -11,6 +11,7 @@ module.exports = async (req, res) => {
 				"title",
 				"description",
 				"options",
+				"category",
 				"created_at",
 				"updated_at",
 			],
@@ -23,7 +24,7 @@ module.exports = async (req, res) => {
 				.json({ status: "error", message: "article not found!" });
 		}
 
-		await articles.destroy({ user_id, slug, title, description });
+		await articles.destroy({ user_id, slug, title, description, category });
 		return res
 			.status(200)
 			.json({ status: "success", message: "article has been deleted!" });

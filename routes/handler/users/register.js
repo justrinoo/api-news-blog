@@ -15,18 +15,13 @@ module.exports = async (req, res) => {
 		if (validate.length) {
 			return res.status(400).json({ status: "error", message: validate });
 		}
-		const user = await Users.findOne({
+		const users = await Users.findOne({
 			where: {
 				email: req.body.email,
 				username: req.body.username,
 				password: req.body.password,
 			},
 		});
-		if (user) {
-			return res
-				.status(409)
-				.json({ status: "error", message: "user already exist!" });
-		}
 
 		const password = await bcrypt.hash(req.body.password, 10);
 
@@ -45,6 +40,6 @@ module.exports = async (req, res) => {
 			},
 		});
 	} catch (error) {
-		return res.status(500).json({ status: "error", message: error.message });
+		return res.status(500).json({ status: "error", message: error });
 	}
 };

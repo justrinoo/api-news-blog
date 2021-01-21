@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
 			slug: "string",
 			title: "string",
 			description: "string",
+			category: "string",
 		};
 		const validate = n.validate(req.body, schema);
 		if (validate.length) {
@@ -31,6 +32,7 @@ module.exports = async (req, res) => {
 				"slug",
 				"title",
 				"description",
+				"category",
 				"options",
 				"created_at",
 				"updated_at",
@@ -42,6 +44,7 @@ module.exports = async (req, res) => {
 				slug: req.body.slug,
 				title: req.body.title,
 				description: req.body.description,
+				category: req.body.category,
 			},
 		});
 
@@ -56,6 +59,7 @@ module.exports = async (req, res) => {
 			slug: req.body.slug,
 			title: req.body.title,
 			description: req.body.description,
+			category: req.body.category,
 			options: "publish",
 		});
 		return res

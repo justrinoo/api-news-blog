@@ -2,20 +2,29 @@ const { Articles, Users } = require("../../../models");
 
 module.exports = async (req, res) => {
 	try {
-		const article_id = req.params.id;
-		const articles = await Articles.findByPk(article_id, {
-			attributes: [
-				"id",
-				"userId",
-				"slug",
-				"title",
-				"description",
-				"options",
-				"created_at",
-				"updated_at",
-			],
-			include: [{ model: Users, required: true, as: "article_user" }],
-		});
+		const slug = req.params.slug;
+
+		const articles = await Articles.findOne(
+			{
+				where: {
+					slug,
+				},
+			},
+			{
+				attributes: [
+					"id",
+					"userId",
+					"slug",
+					"title",
+					"description",
+					"category",
+					"options",
+					"created_at",
+					"updated_at",
+				],
+				include: [{ model: Users, required: true, as: "article_user" }],
+			}
+		);
 		if (!articles) {
 			return res
 				.status(404)

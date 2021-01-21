@@ -25,6 +25,10 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: false,
 			},
+			category: {
+				type: Sequelize.STRING(30),
+				allowNull: false,
+			},
 			options: {
 				type: Sequelize.ENUM(),
 				values: ["publish", "archive"],
